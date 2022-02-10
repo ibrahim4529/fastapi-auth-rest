@@ -9,8 +9,22 @@ Install all deps
 ```bash
 pip install -r requirements.txt
 ```
-
+After installing all deps 
+rename .env.example to .env and change the configuration
 Run The app
 ```bash
 uvicorn app.main:app --reload
 ```
+
+## RUNNING USING DOCKER
+You need install docker first
+
+```bash
+docker build --tag yourimagename .
+```
+```bash
+docker run -d --name yourcontainername -p 8000:80 yourimagename
+```
+
+## OPEN APP
+Open on your browser [http://localhost:8000](http://localhost:8000/docs).
