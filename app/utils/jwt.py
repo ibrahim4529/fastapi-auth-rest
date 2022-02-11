@@ -1,4 +1,5 @@
 from jose import JWTError, jwt
+from datetime import timedelta, datetime
 from app.config import get_setting
 from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer
@@ -16,7 +17,9 @@ credentials_exception = HTTPException(
 
 
 def create_jwt_token(payload: dict) -> str:
+    expire = datetime.utcnow() + timedelta(hours=config.jwt_expire_time_hour)
     to_encode = payload.copy()
+    to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, config.jwt_secret, algorithm=config.jwt_algorithm)
     return encoded_jwt
 
